@@ -78,7 +78,10 @@ def procesar_evento(ch, method, properties, body):
             exchange="",
             routing_key="mensajes_llm",
             body=json.dumps(respuesta),
-            properties=pika.BasicProperties(delivery_mode=2)
+            properties=pika.BasicProperties(
+                delivery_mode=2,
+                content_type="application/json"
+            )
         )
         connection.close()
         print(f"Respuesta publicada en mensajes_llm para trackingId={tracking_id}")
